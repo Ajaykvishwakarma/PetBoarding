@@ -184,14 +184,14 @@ export const CustomizedTables = ({ data }) => {
         </TableHead>
         <TableBody>
           {data.map(
-            ({ id, name, city, address, capacity, cost, verified, rating }) => (
+            ({ _id, name, city, address, capacity, cost, verified, rating }) => (
               <StyledTableRow
                 onClick={() => {
-                  navigate(`/listing/${id}`);
+                  navigate(`/listing/${_id}`);
                 }}
-                key={id}
+                key={_id}
               >
-                <StyledTableCell>{id}</StyledTableCell>
+                <StyledTableCell>{_id}</StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   {name}
                 </StyledTableCell>
@@ -235,13 +235,4 @@ export default function TablePaginationDemo() {
       />
     </>
   );
-}
-
-{
-  /* <label htmlFor="">Sort By: Rating </label>
-      <ColorButton>High-Low</ColorButton>
-      <ColorButton>Low-High</ColorButton>
-      <label htmlFor="">Sort By: CostPerDay </label>
-      <ColorButton>High-Low</ColorButton>
-      <ColorButton>Low-High</ColorButton> */
 }

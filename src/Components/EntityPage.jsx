@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import './Login.css'
 export const EntityPage = () => {
   const { data, city } = useSelector((store) => store.entity);
+  //console.log("data to append" , data)
   const [current, setCurrent] = useState({});
   const { id } = useParams();
+  //console.log("id check",id)
   useEffect(() => {
-    let obj = data.filter((el) => el.id == id);
+    let obj = data.filter((el) => el._id == id);
     setCurrent(obj[0]);
   }, []);
   console.log(current);

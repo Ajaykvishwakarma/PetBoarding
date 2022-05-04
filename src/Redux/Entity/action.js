@@ -1,5 +1,6 @@
 import axios from "axios";
 import { totalCount } from "../Pagination/action";
+
 export const ADD_ALL_ENTITY = "ADD_ALL_ENTITY";
 export const ADD_ALL_CITY = "ADD_ALL_CITY";
 export const ENTITY_LODING = "ENTITY_LODING";
@@ -13,14 +14,13 @@ export const entityError = (payload) => ({ type: ENTITY_ERROR, payload });
 
 export const getAllEntityFunction = (page, skip) => async (dispatch) => {
   try {
-    // ?_page=7&_limit=20
-    // skip = page * skip;
+     
     let { data } = await axios.get(
-      `http://localhost:5000/entity?_page=${page}&_limit=${skip}`
+      `https://petsiteserver.herokuapp.com/petData?page=${page}&size=${skip}`
     );
     // console.log(data);
     dispatch(addAllEntity(data));
-    let count = await axios.get("http://localhost:5000/entity");
+    let count = await axios.get("https://petsiteserver.herokuapp.com/petData");
     dispatch(totalCount(count.data.length));
   } catch (err) {
     console.log(err.message);
@@ -29,7 +29,7 @@ export const getAllEntityFunction = (page, skip) => async (dispatch) => {
 
 export const addEntityFunction = (body) => async (dispatch) => {
   try {
-    let { data } = await axios.post("http://localhost:5000/entity", body);
+    let { data } = await axios.post("https://petsiteserver.herokuapp.com/petData", body);
     // console.log(data);
     dispatch(getAllEntityFunction());
   } catch (err) {
@@ -40,17 +40,17 @@ export const addEntityFunction = (body) => async (dispatch) => {
 export const getFilterEntityFunction =
   (page, skip, filter) => async (dispatch) => {
     try {
-      let { data } = await axios.get(`http://localhost:5000/entity`);
-      if (filter.city !== "") {
+      let { data } = await axios.get(`https://petsiteserver.herokuapp.com/petData`);
+      if (filter.city != "") {
         data = data.filter((el) => el.city == filter.city);
       }
-      if (filter.verified !== "") {
+      if (filter.verified != "") {
         data = data.filter((el) => el.verified == filter.verified);
       }
-      if (filter.rating !== "") {
+      if (filter.rating != "") {
         data = data.sort((a, b) => filter.rating * (+a.rating - +b.rating));
       }
-      if (filter.cost !== "") {
+      if (filter.cost != "") {
         data = data.sort((a, b) => filter.cost * (+a.cost - +b.cost));
       }
 
@@ -63,7 +63,7 @@ export const getFilterEntityFunction =
 
 export const getallCitiesFunction = () => async (dispatch) => {
   try {
-    let { data } = await axios.get(`http://localhost:5000/cities`);
+    let { data } = await axios.get(`https://petsiteserver.herokuapp.com/city`);
     dispatch(addAllCity(data));
   } catch (err) {
     console.log(err.message);

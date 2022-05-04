@@ -9,7 +9,7 @@ const initState = {
   data: [],
   loading: false,
   error: false,
-  city: [],
+  city: []
 };
 export const entiryReducer = (store = initState, { type, payload }) => {
   switch (type) {

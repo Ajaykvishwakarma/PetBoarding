@@ -38,7 +38,7 @@ export const CreateEntityPage = () => {
     dispatch(addEntityFunction(data));
   };
   return (
-    <div className="form-cont" style={{width:"40%", margin:"auto"}}>
+    <div className="form-cont">
       <p>Add New Entity</p>
       <div className="input-cont">
         <TextField
